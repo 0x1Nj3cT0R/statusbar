@@ -1,0 +1,3 @@
+#!/bin/bash
+
+pacman -Qu | grep -Fcv "[ignored]" | sed "s/^/ﮮ /;s/^ﮮ 0$//g"

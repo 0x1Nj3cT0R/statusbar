@@ -1,0 +1,13 @@
+#!/bin/bash
+
+ip_addresses=$(ifconfig | grep 'inet ' | grep -v '127.0.0.1' | awk '{print $2}' | sed -z 's/\n/, /g' | sed 's/, $//g')
+
+case "$(cat /sys/class/net/w*/operstate 2>/dev/null)" in
+    down) echo "睊" ;;
+    up) echo "直 $ip_addresses" ;;
+esac
+
+case "$(cat /sys/class/net/e*/operstate 2>/dev/null)" in
+    down) echo "" ;;
+    up) echo " $ip_addresses" ;;
+esac
